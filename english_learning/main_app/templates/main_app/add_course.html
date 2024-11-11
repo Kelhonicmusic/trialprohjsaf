@@ -1,0 +1,144 @@
+{% extends "main_app/base.html" %}
+
+{% block content %}
+    <h1>Add New Course</h1>
+
+    <!-- Display form errors if any -->
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <p>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </p>
+        </div>
+    {% endif %}
+
+    <!-- Form to add a new course -->
+    <div class="form-container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">Course Title</label>
+                {{ form.title }}  <!-- Course title field -->
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.description.id_for_label }}">Course Description</label>
+                {{ form.description }}  <!-- Course description field -->
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.course_type.id_for_label }}">Course Type</label>
+                {{ form.course_type }}  <!-- Course type field (e.g., Online, In-person) -->
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.lessons_count.id_for_label }}">Lessons Count</label>
+                {{ form.lessons_count }}  <!-- Lessons count field -->
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.price_in_yen.id_for_label }}">Price in Yen</label>
+                {{ form.price_in_yen }}  <!-- Course price field -->
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.image.id_for_label }}">Course Image</label>
+                {{ form.image }}  <!-- Course image field for file upload -->
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.materials.id_for_label }}">Course Materials</label>
+                {{ form.materials }}  <!-- Materials field (e.g., PDF or DOC files) -->
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary">Add Course</button>
+        </form>
+    </div>
+
+    <style>
+        /* Form container styling */
+        .form-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group input[type="file"] {
+            padding: 3px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+            border-radius: 5px;
+        }
+
+        .alert ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .alert ul li {
+            margin-bottom: 5px;
+        }
+    </style>
+
+{% endblock %}

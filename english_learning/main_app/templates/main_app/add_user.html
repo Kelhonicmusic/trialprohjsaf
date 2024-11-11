@@ -1,0 +1,130 @@
+{% extends "main_app/base.html" %}
+
+{% block content %}
+    <style>
+        /* Page title */
+        h1 {
+            color: #34495e;
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Styling for alert messages (errors) */
+        .alert {
+            color: #fff;
+            background-color: #e74c3c;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        /* Form container */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: #34495e;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #34495e;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.6);
+        }
+
+        /* Submit button */
+        .btn-primary {
+            width: 100%;
+            background-color: #3498db;
+            border: none;
+            color: #fff;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        /* Ensure spacing is consistent */
+        .form-group input::placeholder {
+            color: #7f8c8d;
+        }
+
+    </style>
+
+    <h1>Add New User</h1>
+
+    <!-- Display form errors if any -->
+    {% if form.errors %}
+        <div class="alert">
+            <p>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </p>
+        </div>
+    {% endif %}
+
+    <!-- Form to create a new user -->
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">Password</label>
+                {{ form.password }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.role.id_for_label }}">Role</label>
+                {{ form.role }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add User</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,183 @@
+{% extends "main_app/base.html" %}
+
+{% block content %}
+    <h1>Admin Dashboard</h1>
+
+    <style>
+        /* Styling for the admin dashboard page */
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        td {
+            background-color: #fafafa;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover td {
+            background-color: #e9e9e9;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions a {
+            padding: 5px 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .actions a:hover {
+            background-color: #e0e0e0;
+        }
+
+        .confirmation {
+            color: red;
+        }
+
+        /* Form styling */
+        .form-container {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+    </style>
+
+    <h2>Users</h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td class="actions">
+                <a href="{% url 'edit_user' user.id %}">Edit</a> |
+                <a href="{% url 'delete_user' user.id %}" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'add_user' %}">Add New User</a>
+
+    <h2>Enrollments</h2>
+    <table>
+        <tr>
+            <th>Course</th>
+            <th>User</th>
+            <th>Enrollment Type</th>
+            <th>Actions</th>
+        </tr>
+        {% for enrollment in enrollments %}
+        <tr>
+            <td>{{ enrollment.course.title }}</td>
+            <td>{{ enrollment.user.username }}</td>
+            <td>{{ enrollment.enrollment_type }}</td>
+            <td class="actions">
+                <a href="{% url 'edit_enrollment' enrollment.id %}">Edit</a> |
+                <a href="{% url 'delete_enrollment' enrollment.id %}" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'add_enrollment' %}">Add New Enrollment</a>
+
+    <h2>Courses</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        {% for course in courses %}
+        <tr>
+            <td>{{ course.title }}</td>
+            <td>{{ course.description }}</td>
+            <td>{{ course.price_in_yen }}</td>
+            <td class="actions">
+                <a href="{% url 'edit_course' course.id %}">Edit</a> |
+                <a href="{% url 'delete_course' course.id %}" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'add_course' %}">Add New Course</a>
+    <a href="{% url 'add_lesson' %}">Add New Lesson</a>
+
+
+    <h2>Bookings</h2>
+    <table>
+        <tr>
+            <th>Lesson</th>
+            <th>User</th>
+            <th>Lesson Type</th>
+            <th>Schedule</th>
+            <th>Actions</th>
+        </tr>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.lesson.title }}</td>
+            <td>{{ booking.user.username }}</td>
+            <td>{{ booking.lesson_type }}</td>
+            <td>{{ booking.schedule }}</td>
+            <td class="actions">
+                <a href="{% url 'edit_booking' booking.id %}">Edit</a> |
+                <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'add_booking' %}">Add New Booking</a>
+
+{% endblock %}

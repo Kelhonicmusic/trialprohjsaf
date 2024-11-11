@@ -1,0 +1,178 @@
+{% extends "main_app/base.html" %}
+
+{% block content %}
+    <h1>Add New Lesson</h1>
+
+    <!-- Display form errors if any -->
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <p>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </p>
+        </div>
+    {% endif %}
+
+    <!-- Form to add a new lesson -->
+    <div class="form-container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">Title</label>
+                {{ form.title }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.course.id_for_label }}">Course</label>
+                {{ form.course }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.content.id_for_label }}">Content</label>
+                {{ form.content }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.video_url.id_for_label }}">Video URL</label>
+                {{ form.video_url }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.start_time.id_for_label }}">Start Time</label>
+                {{ form.start_time }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.duration.id_for_label }}">Duration</label>
+                {{ form.duration }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.zoom_link.id_for_label }}">Zoom Link</label>
+                {{ form.zoom_link }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.materials.id_for_label }}">Materials</label>
+                {{ form.materials }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.completed.id_for_label }}">Completed</label>
+                {{ form.completed }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.teacher.id_for_label }}">Teacher</label>
+                {{ form.teacher }}
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary">Add Lesson</button>
+        </form>
+    </div>
+
+    <style>
+        /* General styling for the page */
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .alert {
+            color: #d9534f;
+            background-color: #f2dede;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .alert ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .alert ul li {
+            font-size: 1em;
+        }
+
+        /* Form container styling */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+
+        /* Button styling */
+        button.btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button.btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .form-container {
+                padding: 15px;
+                max-width: 100%;
+            }
+
+            label, input, select, textarea {
+                font-size: 1em;
+            }
+
+            button.btn {
+                font-size: 1em;
+            }
+        }
+    </style>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "main_app/base.html" %}
+
+{% block content %}
+    <h1>Delete Enrollment</h1>
+
+    <p>Are you sure you want to delete the enrollment for <strong>{{ enrollment.user.username }}</strong> in the course <strong>{{ enrollment.course.name }}</strong>?</p>
+
+    <!-- Display enrollment details to confirm -->
+    <ul>
+        <li><strong>Student Username:</strong> {{ enrollment.user.username }}</li>
+        <li><strong>Course:</strong> {{ enrollment.course.name }}</li>
+        <li><strong>Enrollment Type:</strong> {{ enrollment.enrollment_type }}</li>
+        <li><strong>Level:</strong> {{ enrollment.level }}</li>
+    </ul>
+
+    <!-- Delete confirmation form -->
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete Enrollment</button>
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+
+    <!-- Confirmation message style -->
+    <style>
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "main_app/base.html" %}
+
+{% block content %}
+    <style>
+        /* Container for the form */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header styling */
+        h1 {
+            text-align: center;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin-bottom: 20px;
+        }
+
+        /* Form element styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* Input fields and select boxes styling */
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Error message styling */
+        .alert {
+            color: #b94a48;
+            background-color: #f2dede;
+            border-color: #eed3d7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .alert ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* Submit button styling */
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <h1>Add Lesson Booking</h1>
+
+    <!-- Display form errors if any -->
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <p>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </p>
+        </div>
+    {% endif %}
+
+    <!-- Form to add a lesson booking -->
+    <div class="form-container">
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.user.id_for_label }}">User</label>
+                {{ form.user }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.lesson.id_for_label }}">Lesson</label>
+                {{ form.lesson }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.lesson_type.id_for_label }}">Lesson Type</label>
+                {{ form.lesson_type }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.schedule.id_for_label }}">Schedule</label>
+                {{ form.schedule }}
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary">Add Booking</button>
+        </form>
+    </div>
+
+{% endblock %}

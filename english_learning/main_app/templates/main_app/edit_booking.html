@@ -1,0 +1,106 @@
+{% extends "main_app/base.html" %}
+
+{% block content %}
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .alert {
+            color: #b94a48;
+            background-color: #f2dede;
+            border-color: #eed3d7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <h1>Edit Booking</h1>
+
+    {% if form.errors %}
+        <div class="alert">
+            <p>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </p>
+        </div>
+    {% endif %}
+
+    <div class="form-container">
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.user.id_for_label }}">User</label>
+                {{ form.user }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.lesson.id_for_label }}">Lesson</label>
+                {{ form.lesson }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.lesson_type.id_for_label }}">Lesson Type</label>
+                {{ form.lesson_type }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.schedule.id_for_label }}">Schedule</label>
+                {{ form.schedule }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Booking</button>
+        </form>
+    </div>
+
+{% endblock %}

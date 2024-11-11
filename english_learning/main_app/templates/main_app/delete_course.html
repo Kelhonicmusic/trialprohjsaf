@@ -1,0 +1,67 @@
+{% extends "main_app/base.html" %}
+
+{% block content %}
+    <h1>Delete Course</h1>
+
+    <p>Are you sure you want to delete the course titled "<strong>{{ course.title }}</strong>"?</p>
+    
+    <!-- Confirm deletion -->
+    <div class="form-container">
+        <form method="POST">
+            {% csrf_token %}
+            
+            <button type="submit" class="btn btn-danger">Yes, Delete Course</button>
+            <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <style>
+        .form-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .btn {
+            display: inline-block;
+            width: auto;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+
+{% endblock %}
